@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>WindBorne Balloon + Weather Explorer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Leaflet CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>WindBorne Balloon + Weather Explorer</h1>
+      <p>
+        Last 24 hours of balloon tracks, combined with live surface weather from
+        Open-Meteo.
+      </p>
+      <button id="refresh-btn">Refresh data</button>
+      <span id="status"></span>
+    </header>
+
+    <main>
+      <div id="map"></div>
+      <aside id="sidebar">
+        <h2>Selected balloon</h2>
+        <div id="balloon-info">
+          <p>Click a track on the map to see details and current weather.</p>
+        </div>
+      </aside>
+    </main>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script src="script.js"></script>
+  </body>
+</html>
