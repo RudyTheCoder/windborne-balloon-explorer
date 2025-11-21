@@ -1,4 +1,4 @@
-const WINDBORNE_BASE = "http://localhost:4000/api/hour";
+const WINDBORNE_BASE = "/api/hour";
 const HOURS = Array.from({ length: 24 }, (_, i) =>
   i.toString().padStart(2, "0")
 );
@@ -67,16 +67,9 @@ async function loadAllData() {
       processHourJson(hour, json);
     }
 
-    for (const { hour, json } of results) {
-      if (!json) continue;
-      processHourJson(hour, json);
-    }
-
     if (balloonHistories.size === 0) {
       console.warn("No balloon histories found after processing all hours.");
     }
-
-    drawTracks();
 
     drawTracks();
     statusEl.textContent = "Loaded latest 24h of data.";
@@ -226,7 +219,7 @@ function showBalloonInfo(id, latest, { loading, weather, error }) {
 }
 
 async function fetchWeather(lat, lon) {
-  // Open-Meteo current weather API (no key needed)
+  // Open-Meteo current weather API (no key needed, CORS-friendly)
   const url = new URL("https://api.open-meteo.com/v1/forecast");
   url.searchParams.set("latitude", lat.toString());
   url.searchParams.set("longitude", lon.toString());
@@ -234,6 +227,7 @@ async function fetchWeather(lat, lon) {
 
   const res = await fetch(url.toString());
   if (!res.ok) throw new Error(`Weather HTTP ${res.status}`);
+
   const data = await res.json();
   if (!data.current_weather) throw new Error("Missing current_weather");
 
